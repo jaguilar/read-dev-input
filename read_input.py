@@ -48,16 +48,40 @@ INPUT_EVENT_SZ = ustruct.calcsize(INPUT_EVENT_FMT)
 
 class Controller:
     def __init__(self):
-        self_axis_dpad_x = 0
-        self_axis_dpad_y = 0
-        self_axis_lstick_x = 0
-        self_axis_lstick_y = 0
-        self_axis_rstick_x = 0
-        self_axis_rstick_y = 0
-        self_axis_ltrig = 0
-        self_axis_rtrig = 0
+        self._axis_dpad_x = 0
+        self._axis_dpad_y = 0
+        self._axis_lstick_x = 0
+        self._axis_lstick_y = 0
+        self._axis_rstick_x = 0
+        self._axis_rstick_y = 0
+        self._axis_ltrig = 0
+        self._axis_rtrig = 0
         self.buttons = []
         self.watching = False
+
+    def axis_dpad_x(self):
+        return self._axis_dpad_x
+
+    def axis_dpad_y(self):
+        return self._axis_dpad_y
+
+    def axis_lstick_x(self):
+        return self._axis_lstick_x
+
+    def axis_lstick_y(self):
+        return self._axis_lstick_y
+
+    def axis_rstick_x(self):
+        return self._axis_rstick_x
+
+    def axis_rstick_y(self):
+        return self._axis_rstick_y
+
+    def axis_ltrig(self):
+        return self._axis_ltrig
+
+    def axis_rtrig(self):
+        return self._axis_rtrig
 
     def watch(self, filename):
         self.watching = True
@@ -89,21 +113,21 @@ class Controller:
                 self.buttons.remove(code)
         elif type == EV_ABS:
             if code == _AXIS_LSTK_X:
-                self_axis_lstick_x = value
+                self._axis_lstick_x = value
             elif code == _AXIS_LSTK_Y:
-                self_axis_lstick_y = value
+                self._axis_lstick_y = value
             elif code == _AXIS_RSTK_X:
-                self_axis_rstick_x = value
+                self._axis_rstick_x = value
             elif code == _AXIS_RSTK_Y:
-                self_axis_rstick_y = value
+                self._axis_rstick_y = value
             elif code == _AXIS_DPAD_X:
-                self_axis_dpad_x = value
+                self._axis_dpad_x = value
             elif code == _AXIS_DPAD_Y:
-                self_axis_dpad_y = value
+                self._axis_dpad_y = value
             elif code == _AXIS_LTRIG:
-                self_axis_ltrig = value
+                self._axis_ltrig = value
             elif code == _AXIS_RTRIG:
-                self_axis_rtrig = value
+                self._axis_rtrig = value
         elif type == 0:
             pass
         else:
